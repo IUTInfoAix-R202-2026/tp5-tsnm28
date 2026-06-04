@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.util.Optional;
 import javax.sql.DataSource;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -27,7 +26,6 @@ class TaxonDaoTest {
     dao = new TaxonDao(source);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void trouver_tous_renvoie_les_quatre_taxons_tries_par_code() {
     assertThat(dao.findAll())
@@ -35,7 +33,6 @@ class TaxonDaoTest {
         .containsExactly("Nyclei", "Pippip", "Rhihip", "Tadten");
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void trouver_par_code_renvoie_le_taxon_attendu() {
     Optional<Taxon> taxon = dao.getByCode("Pippip");
@@ -45,7 +42,6 @@ class TaxonDaoTest {
     assertThat(taxon.get().nomLatin()).isEqualTo("Pipistrellus pipistrellus");
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void trouver_par_code_inconnu_renvoie_vide() {
     assertThat(dao.getByCode("Zzzzzz")).isEmpty();
