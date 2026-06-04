@@ -69,8 +69,23 @@ public class DetailSiteDao {
     //   WHERE p.numero_carre = ?
     //   ORDER BY t.nom_vernaculaire
     //
+    String sql =
+        "SELECT DISTINCT t.nom_vernaculaire FROM observation o JOIN passage p ON o.passage_id = p.id JOIN taxon   t ON o.code_taxon = t.code WHERE p.numero_carre = ? ORDER BY t.nom_vernaculaire";
     // Préparer la requête, positionner le paramètre, parcourir le ResultSet et ajouter chaque
     // nom à `especes`. Envelopper toute SQLException dans une DataAccessException.
+    try (Connection connexion = source.getConnection();
+        PreparedStatement ps = connexion.prepareStatement(sql)) {
+      ps.setString(1, numeroCarre);
+      try (ResultSet rs = ps.executeQuery()) {
+        while (rs.next()) {
+          especes.add(rs.getString("nom_vernaculaire"));
+        }
+      }
+
+    } catch (SQLException e) {
+      // TODO: handle exception
+      throw new DataAccessException("message" + numeroCarre, e);
+    }
 
     return especes;
   }
