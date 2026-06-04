@@ -35,7 +35,6 @@ class ImportPassageServiceTest {
     service = new ImportPassageService(source);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void un_import_valide_persiste_le_passage() {
     int avant = service.nombrePassages();
@@ -54,7 +53,6 @@ class ImportPassageServiceTest {
     assertThat(service.nombrePassages()).isEqualTo(avant + 1);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void un_import_valide_persiste_les_observations() throws SQLException {
     long id =
@@ -80,7 +78,6 @@ class ImportPassageServiceTest {
     }
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
   @Test
   void un_import_avec_un_taxon_inexistant_est_entierement_annule() {
     int avant = service.nombrePassages();
